@@ -1,0 +1,104 @@
+#include "oplus-charge-20211-legacy.dtsi"
+&pmi632_qg {
+	status = "disabled";
+};
+&bcl_sensor {
+	status = "disabled";
+};
+&bcl_soc {
+	status = "disabled";
+};
+
+&pmi632_low_soc{
+	temperature = <85000>;
+};
+
+&pmi632_ibat_lvl0{
+	temperature = <85000>;
+};
+
+&pmi632_vbat_lvl0{
+	temperature = <85000>;
+};
+
+&thermal_zones {
+	pmi632-ibat-lvl0 {
+		/delete-property/ thermal-sensors;
+		thermal-sensors = <&pm6125_adc_tm ADC_AMUX_THM2_PU2>;
+		/delete-property/ thermal-governor;
+		thermal-governor = "step_wise";
+	};
+	pmi632-ibat-lvl1 {
+		status = "disabled";
+	};
+	pmi632-vbat-lvl0 {
+		/delete-property/ thermal-sensors;
+		thermal-sensors = <&pm6125_adc_tm ADC_AMUX_THM2_PU2>;
+		/delete-property/ thermal-governor;
+		thermal-governor = "step_wise";
+	};
+	pmi632-vbat-lvl1 {
+		status = "disabled";
+	};
+	pmi632-vbat-lvl2 {
+		status = "disabled";
+	};
+	pmi632-bcl-lvl0 {
+		status = "disabled";
+	};
+	pmi632-bcl-lvl1 {
+		status = "disabled";
+	};
+	pmi632-bcl-lvl2 {
+		status = "disabled";
+	};
+	soc {
+		/delete-property/ thermal-sensors;
+		thermal-sensors = <&pm6125_adc_tm ADC_AMUX_THM2_PU2>;
+		/delete-property/ thermal-governor;
+		thermal-governor = "step_wise";
+	};
+};
+
+&usb0 {
+	dwc3@4e00000 {
+		maximum-speed = "high-speed";
+	};
+};
+
+&qupv3_se0_i2c {
+		pinctrl-names = "default", "sleep", "pulldown", "pullup";
+		pinctrl-0 = <&qupv3_se0_i2c_active>;
+		pinctrl-1 = <&qupv3_se0_i2c_sleep>;
+		pinctrl-2 = <&qupv3_se0_i2c_down>;
+		pinctrl-3 = <&qupv3_se0_i2c_up>;
+		qcom,wrapper-core = <&qupv3_0>;
+};
+&tlmm {
+	qupv3_se0_i2c_down: qupv3_se0_i2c_down {
+		mux {
+			pins = "gpio0", "gpio1";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio0", "gpio1";
+			drive-strength = <2>;
+			bias-pull-down;
+			output-low;
+		};
+	};
+	qupv3_se0_i2c_up: qupv3_se0_i2c_up {
+		mux {
+			pins = "gpio0", "gpio1";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio0", "gpio1";
+			drive-strength = <2>;
+			bias-pull-up;
+			input-enable;
+		};
+	};
+};
