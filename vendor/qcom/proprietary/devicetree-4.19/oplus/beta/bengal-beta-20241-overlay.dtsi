@@ -1,0 +1,3 @@
+#include "nfc/beta-nfc-pn557.dtsi"
+
+#include "sensor/beta-sensor-mtp.dtsi"
