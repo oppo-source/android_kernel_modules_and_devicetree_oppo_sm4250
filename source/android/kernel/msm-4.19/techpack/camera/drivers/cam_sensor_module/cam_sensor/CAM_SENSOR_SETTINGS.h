@@ -1,0 +1,5 @@
+#include "ov02b10_setting.h"
+#include "ov48b_setting.h"
+#include "imx471_setting.h"
+#include "gc02m1b_setting.h"
+#include "ov13b10_setting.h"
